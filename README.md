@@ -1,9 +1,6 @@
-# KeyValue_DataStore
-Simple Key Value based DataStore in Java
+# Simple Key Value based DataStore in Java
 
-# Requirements:
-
-# The data store will support the following functional requirements.
+# Functional Requirements:
 
 1. It can be initialized using an optional file path. If one is not provided, it will reliably
 create itself in a reasonable location on the laptop. 
@@ -18,16 +15,16 @@ is always a string - capped at 32chars. The value is always a JSON object - capp
 
 3. If Create is invoked for an existing key, an appropriate error must be returned.
 
-Done> Will get error message if key already exists in DataStore.
+## Done> Will get error message if key already exists in DataStore.
 
 4. A Read operation on a key can be performed by providing the key, and receiving the
 value in response, as a JSON object.
 
-## Done> 
+## Done> Done the feature.
 
 5. A Delete operation can be performed by providing the key.
 
-## Done> Done that feature
+## Done> Done the feature
 
 6. Every key supports setting a Time-To-Live property when it is created. This property is
 optional. If provided, it will be evaluated as an integer defining the number of seconds
@@ -42,7 +39,7 @@ unexpected ways or breaches any limits.
 ## Done> Mostly I have checked for corner cases
 
 
-# The data store will also support the following non-functional requirements.
+# Non-Functional requirements.
 
 1. The size of the file storing data must never exceed 1GB.
 
@@ -64,7 +61,7 @@ store.
 
 ## Done> Using In-Memory Datastructures for verify key exists or not and checking TTL before doing read/delete instead of doing Disk I/O calls everytime, since it can be 100X slower
 
-# <<<<IMPO>>>>
+# IMPORTANT NOTES
 
 1) Security : Value has been encoded as Base64 string instead of storing it as Plaintext. Also it is useful to store complex JSOn with many newlines as single line. So it can be efficiently retrieved from file
 2) Memory: Not loading entire file into memory since it can be huge(upto 1GB) and will take up lots of memory. So loading one line into memory at a time and processing it.
