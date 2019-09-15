@@ -116,11 +116,18 @@ public class DataStore implements Serializable {
               dateInMilliSecs = calendar.getTimeInMillis() + (TTL * ONE_SEC_IN_MILLIS);
             }
             String key_value = DataStore.INSTANCE.createKeyValue(key, value);
-            Utils.writeToFile(dbFilePath, key_value, true);
-            keyValueMap.put(key, value);
-            Utils.writeToFile(metaFilePath, DataStore.INSTANCE.createKeyWithTTL(key, dateInMilliSecs), true);
-            metadataMap.put(key, dateInMilliSecs.toString());
-            System.out.println("SUCCESS: Key-Value pair has been added successfully to DataStore");
+            boolean success = Utils.writeToFile(dbFilePath, key_value, true);
+            if(success) {
+              keyValueMap.put(key, value);
+              success = Utils.writeToFile(metaFilePath, DataStore.INSTANCE.createKeyWithTTL(key, dateInMilliSecs), true);
+              if (success)
+                metadataMap.put(key, dateInMilliSecs.toString());
+              if(success)
+                System.out.println("SUCCESS: Key-Value pair has been added successfully to DataStore");
+            }
+            else{
+              System.err.println("FAILED: Reasons could be File doesn't have write permission or File is too big\n");
+            }
             break;
           case 2://Read
             System.out.print("Give the key : ");
